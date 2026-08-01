@@ -20,19 +20,23 @@ public class Usuario {
     private String biografia;
 
     // Relacionamentos
-    private List<Produto> produtos;
-    private List<Notificacao> notificacoes;
-    private List<Favorito> favoritos;
-
-    // Construtor vazio
-    public Usuario() {
-        this.produtos = new ArrayList<>();
-        this.notificacoes = new ArrayList<>();
-        this.favoritos = new ArrayList<>();
-    }
+    @OneToMany(mappedBy = "Vendedor")
+    private List<Produto> produtos = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "Destinatario")
+    private List<Notificacao> notificacoes = new ArrayList<>();
+    
+    @ManyToMany
+    @JoinTable(name = "usuario/produto/favorito",
+	    		joinColumns = @JoinColumn(name = "usuario_id"),
+	            inverseJoinColumns = @JoinColumn(name = "produto_id"))
+    private List<Produto> favoritos = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "Remetente")
+    private List<Mensagem> mensagem = new ArrayList<>();
 
     // Construtor completo
-    public Usuario(int id, String nome, String emailInstitucional, String senha,
+    public Usuario(long id, String nome, String emailInstitucional, String senha,
                    LocalDate dataNascimento, String curso,
                    String fotoPerfil, String biografia) {
 
@@ -45,27 +49,11 @@ public class Usuario {
         this.fotoPerfil = fotoPerfil;
         this.biografia = biografia;
 
-        this.produtos = new ArrayList<>();
-        this.notificacoes = new ArrayList<>();
-        this.favoritos = new ArrayList<>();
     }
 
     // ==========================
     // Métodos do diagrama
     // ==========================
-
-    public void cadastrarPerfil() {
-        System.out.println("Perfil cadastrado com sucesso!");
-    }
-
-    public void editarPerfil(String nome, String curso, String biografia, String fotoPerfil) {
-        this.nome = nome;
-        this.curso = curso;
-        this.biografia = biografia;
-        this.fotoPerfil = fotoPerfil;
-
-        System.out.println("Perfil atualizado!");
-    }
 
     public boolean fazerLogin(String email, String senha) {
         return this.emailInstitucional.equals(email)
@@ -73,13 +61,9 @@ public class Usuario {
     }
 
     public void favoritarProduto(Produto produto) {
-        Favorito favorito = new Favorito();
-        favorito.setUsuario(this);
-        favorito.setProduto(produto);
-
-        favoritos.add(favorito);
-
-        System.out.println("Produto favoritado!");
+    	if(!this.favoritos.contains(produto)) {
+    		this.favoritos.add(produto);
+    	};
     }
 
     // ==========================
