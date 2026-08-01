@@ -80,8 +80,14 @@ public class Notificacao {
 	}
 	
 	
+	public void criarNotificacao(Usuario usuario, String titulo, String texto) {
+		this.destinatario = usuario;
+		this.titulo = titulo;
+		this.mensagem = texto;
+	}
 	
-	
-	
+	public void marcarComoLida() {
+		this.lida  = true;
+	}
 	
 }
