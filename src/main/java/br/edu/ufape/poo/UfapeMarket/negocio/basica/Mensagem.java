@@ -13,6 +13,7 @@ public class Mensagem {
 	private LocalDateTime dataHora;
 	
 	@ManyToOne
+	@JoinColumn(name = "remetente_id")
 	private Usuario remetente;
 	
 	public Mensagem(long id, String texto, Usuario remetente) {

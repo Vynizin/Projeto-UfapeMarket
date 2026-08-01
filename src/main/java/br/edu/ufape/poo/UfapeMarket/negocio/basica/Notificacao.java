@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 
 @Entity
@@ -17,6 +18,7 @@ public class Notificacao {
 	private String mensagem;
 	private LocalDateTime dataHora;
 	private boolean lida;
+	@ManyToOne
 	private Usuario destinatario;
 	
 	public Notificacao(long id, String titulo, String mensagem, LocalDateTime dataHora, 
@@ -80,11 +82,6 @@ public class Notificacao {
 	}
 	
 	
-	public void criarNotificacao(Usuario usuario, String titulo, String texto) {
-		this.destinatario = usuario;
-		this.titulo = titulo;
-		this.mensagem = texto;
-	}
 	
 	public void marcarComoLida() {
 		this.lida  = true;
