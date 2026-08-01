@@ -20,10 +20,10 @@ public class Usuario {
     private String biografia;
 
     // Relacionamentos
-    @OneToMany(mappedBy = "Vendedor")
+    @OneToMany(mappedBy = "vendedor")
     private List<Produto> produtos = new ArrayList<>();
     
-    @OneToMany(mappedBy = "Destinatario")
+    @OneToMany(mappedBy = "destinatario")
     private List<Notificacao> notificacoes = new ArrayList<>();
     
     @ManyToMany
@@ -32,15 +32,14 @@ public class Usuario {
 	            inverseJoinColumns = @JoinColumn(name = "produto_id"))
     private List<Produto> favoritos = new ArrayList<>();
     
-    @OneToMany(mappedBy = "Remetente")
+    @OneToMany(mappedBy = "remetente")
     private List<Mensagem> mensagem = new ArrayList<>();
 
     // Construtor completo
-    public Usuario(long id, String nome, String emailInstitucional, String senha,
+    public Usuario(String nome, String emailInstitucional, String senha,
                    LocalDate dataNascimento, String curso,
                    String fotoPerfil, String biografia) {
 
-        this.id = id;
         this.nome = nome;
         this.emailInstitucional = emailInstitucional;
         this.senha = senha;
@@ -70,7 +69,7 @@ public class Usuario {
     // Getters e Setters
     // ==========================
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -150,13 +149,6 @@ public class Usuario {
         this.notificacoes = notificacoes;
     }
 
-    public List<Favorito> getFavoritos() {
-        return favoritos;
-    }
-
-    public void setFavoritos(List<Favorito> favoritos) {
-        this.favoritos = favoritos;
-    }
 
     @Override
     public String toString() {
