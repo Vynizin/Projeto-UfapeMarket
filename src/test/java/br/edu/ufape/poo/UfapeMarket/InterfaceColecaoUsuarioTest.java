@@ -17,7 +17,7 @@ class InterfaceColecaoUsuarioTest {
 	@Test
 	void cadastrarTest() {
 		long qntusuario = colecaoUsuario.count();
-		Usuario u = new Usuario("João", "cbjrchorao1313@gmail.com", "12345", null, "BCC", null, null);
+		Usuario u = new Usuario("Arthur", "arthurbr2030@gmail.com", "123", null, "BCC", null, null);
 		
 		colecaoUsuario.save(u);
 		long qntusuario2 = colecaoUsuario.count();
