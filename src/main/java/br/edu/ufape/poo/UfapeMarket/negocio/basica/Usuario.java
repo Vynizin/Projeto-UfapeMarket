@@ -149,13 +149,13 @@ public class Usuario {
     public void setNotificacoes(List<Notificacao> notificacoes) {
         this.notificacoes = notificacoes;
     }
-
-    public List<Favorito> getFavoritos() {
-        return favoritos;
+    
+    public List<Mensagem> getMensagem() {
+        return mensagem;
     }
-
-    public void setFavoritos(List<Favorito> favoritos) {
-        this.favoritos = favoritos;
+    
+    public void setMensagem(List<Mensagem> mensagem) {
+        this.mensagem = mensagem;
     }
 
     @Override
