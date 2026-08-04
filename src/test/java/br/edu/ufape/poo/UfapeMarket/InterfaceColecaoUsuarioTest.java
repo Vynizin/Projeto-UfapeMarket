@@ -13,10 +13,13 @@ import br.edu.ufape.poo.UfapeMarket.negocio.basica.Usuario;
 class InterfaceColecaoUsuarioTest {
 	@Autowired
 	private InterfaceColecaoUsuario colecaoUsuario;
+	
 	@Test
 	void cadastrarTest() {
 		long qntusuario = colecaoUsuario.count();
-		Usuario u = new Usuario("David", "dayvsonjeik@gmail.com", "12345", "26/10/2007", "BCC");
+		Usuario u = new Usuario("David", "dayvsonjeik@gmail.com", "12345", null, "26/10/2007", "BCC", null);
+		
+		colecaoUsuario.save(u);
+		long qntusuario2 = colecaoUsuario.count();
 	}
-
 }

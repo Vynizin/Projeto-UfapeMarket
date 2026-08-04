@@ -55,5 +55,4 @@ public class Mensagem {
 		this.remetente = remetente;
 	}
 	
-	
 }
