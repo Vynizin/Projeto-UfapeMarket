@@ -19,7 +19,6 @@ public class Usuario {
     private String fotoPerfil;
     private String biografia;
 
-    // Relacionamentos
     @OneToMany(mappedBy = "vendedor")
     private List<Produto> produtos = new ArrayList<>();
     
@@ -35,7 +34,6 @@ public class Usuario {
     @OneToMany(mappedBy = "remetente")
     private List<Mensagem> mensagem = new ArrayList<>();
 
-    // Construtor completo
     public Usuario(String nome, String emailInstitucional, String senha,
                    LocalDate dataNascimento, String curso,
                    String fotoPerfil, String biografia) {
@@ -50,9 +48,7 @@ public class Usuario {
 
     }
 
-    // ==========================
-    // Métodos do diagrama
-    // ==========================
+
 
     public boolean fazerLogin(String email, String senha) {
         return this.emailInstitucional.equals(email)
@@ -65,9 +61,6 @@ public class Usuario {
     	};
     }
 
-    // ==========================
-    // Getters e Setters
-    // ==========================
 
     public long getId() {
         return id;
@@ -148,7 +141,6 @@ public class Usuario {
     public void setNotificacoes(List<Notificacao> notificacoes) {
         this.notificacoes = notificacoes;
     }
-    
     public List<Mensagem> getMensagem() {
         return mensagem;
     }

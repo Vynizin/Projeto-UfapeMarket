@@ -7,6 +7,6 @@ import br.edu.ufape.poo.UfapeMarket.negocio.basica.Notificacao;
 
 
 @Repository
-public interface ColecaoNotificacao extends JpaRepository<Notificacao, Long> {
+public interface InterfaceColecaoNotificacao extends JpaRepository<Notificacao, Long> {
 
 }
