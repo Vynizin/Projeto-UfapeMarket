@@ -7,6 +7,6 @@ import br.edu.ufape.poo.UfapeMarket.negocio.basica.Venda;
 
 @Repository
 
-public interface InterfaceColeçãoVenda extends JpaRepository<Venda, Long> {
+public interface InterfaceRepositorioVenda extends JpaRepository<Venda, Long> {
 
 }
