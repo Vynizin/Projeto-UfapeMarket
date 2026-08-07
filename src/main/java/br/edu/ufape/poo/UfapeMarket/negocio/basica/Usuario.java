@@ -19,7 +19,11 @@ public class Usuario {
     private String fotoPerfil;
     private String biografia;
 
-    @OneToMany(mappedBy = "vendedor")
+    public Usuario() {
+		super();
+	}
+
+	@OneToMany(mappedBy = "vendedor")
     private List<Produto> produtos = new ArrayList<>();
     
     @OneToMany(mappedBy = "destinatario")

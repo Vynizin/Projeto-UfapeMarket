@@ -7,5 +7,5 @@ import br.edu.ufape.poo.UfapeMarket.negocio.basica.Usuario;
 
 @Repository
 public interface InterfaceRepositorioUsuario extends JpaRepository<Usuario, Long> {
-	Usuario findByEmail(String emailInstitucional);
+	Usuario findByEmailInstitucional(String emailInstitucional);
 }
