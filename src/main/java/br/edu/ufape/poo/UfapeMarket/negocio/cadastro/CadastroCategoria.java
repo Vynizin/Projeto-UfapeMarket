@@ -10,7 +10,7 @@ import br.edu.ufape.poo.UfapeMarket.negocio.basica.Categoria;
 import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.CategoriaDuplicadaException;
 
 @Service
-public class CadastroCategoria {
+public class CadastroCategoria implements InterfaceCadastroCategoria {
 	@Autowired
 	private InterfaceColecaoCategoria colecaoCategoria;
 	
