@@ -9,7 +9,7 @@ import br.edu.ufape.poo.UfapeMarket.negocio.basica.Mensagem;
 import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.MensagemVaziaException;
 
 @Service
-public class GerenciadorMensagem {
+public class GerenciadorMensagem implements InterfaceGerenciadorMensagem {
 	
 	@Autowired
 	private InterfaceRepositorioMensagem colecaoMensagem;
