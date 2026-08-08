@@ -9,7 +9,7 @@ import jakarta.persistence.*;
 
 
 
-public class chat {
+public class Chat {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
@@ -22,7 +22,7 @@ public class chat {
 	@ManyToOne
 	@JoinColumn(name = "comprador_id")
 	private Usuario comprador;
-	public chat(long id, Produto produto, Usuario vendedor, Usuario comprador) {
+	public Chat(long id, Produto produto, Usuario vendedor, Usuario comprador) {
 		super();
 		this.id = id;
 		this.produto = produto;
