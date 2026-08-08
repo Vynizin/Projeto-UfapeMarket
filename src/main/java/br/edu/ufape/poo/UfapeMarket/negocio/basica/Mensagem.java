@@ -16,6 +16,14 @@ public class Mensagem {
 	@JoinColumn(name = "remetente_id")
 	private Usuario remetente;
 	
+	@ManyToOne
+	@JoinColumn(name = "chat_id")
+	private Chat chat;
+	
+	public Mensagem() {
+		this.dataHora = LocalDateTime.now();
+	}
+	
 	public Mensagem(long id, String texto, Usuario remetente) {
 		this.id = id;
 		this.texto = texto;
