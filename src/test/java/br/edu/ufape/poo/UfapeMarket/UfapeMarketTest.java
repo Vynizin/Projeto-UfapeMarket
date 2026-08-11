@@ -38,18 +38,17 @@ class UfapeMarketTest {
     @Test
     void avaliarProprioUsuarioTest() {
 
-        Usuario usuario = new Usuario();
+        Usuario usuario = new Usuario("Teste", "teste@ufape.edu.br", "123", null, "Computação", null, null);
 
-        usuario.setId(1);
+        usuario.setId(2);
 
-        Avaliacao avaliacao = new Avaliacao(5, "Legal", null, null);
+        Avaliacao avaliacao = new Avaliacao(5, "Boa!", usuario, usuario);
 
-        avaliacao.setAutor(usuario);
-        avaliacao.setAvaliado(usuario);
-
-        assertThrows(
-            UsuarioNaoPodeSeAvaliarException.class,
-            () -> fachada.avaliarProduto(avaliacao)
+        assertThrows(UsuarioNaoPodeSeAvaliarException.class,
+        		() -> fachada.avaliarProduto(avaliacao)
         );
     }
+    
+    
+    
 }
