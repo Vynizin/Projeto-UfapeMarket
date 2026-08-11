@@ -17,9 +17,8 @@ public class Avaliacao {
 	@ManyToOne
 	@JoinColumn(name = "autor_id")
 	private Usuario autor;
-	public Avaliacao(long id, int nota, String comentario, Usuario avaliado, Usuario autor) {
+	public Avaliacao(int nota, String comentario, Usuario avaliado, Usuario autor) {
 		super();
-		this.id = id;
 		this.nota = nota;
 		this.comentario = comentario;
 		this.avaliado = avaliado;
