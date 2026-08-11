@@ -20,6 +20,7 @@ import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.UsuarioEmailJaCadastradoExc
 import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.UsuarioNomeObrigatorioException;
 import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.VendaProdutoObrigatorioException;
 import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.ProdutoIndisponivelException;
+import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.UsuarioNaoPodeSeAvaliarException;
 
 public interface InterfaceFachada {
 
@@ -44,7 +45,8 @@ public interface InterfaceFachada {
     Mensagem enviarMensagem(Mensagem mensagem)
             throws MensagemVaziaException;
 
-    Avaliacao avaliarProduto(Avaliacao avaliacao);
+    Avaliacao avaliarProduto(Avaliacao avaliacao)
+            throws UsuarioNaoPodeSeAvaliarException;
 
     void favoritarProduto(Usuario usuario, Produto produto);
 

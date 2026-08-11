@@ -27,6 +27,7 @@ import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.ProdutoIndisponivelExceptio
 import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.ProdutoQuantidadeInvalidaException;
 import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.UsuarioEmailInvalidoException;
 import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.UsuarioEmailJaCadastradoException;
+import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.UsuarioNaoPodeSeAvaliarException;
 import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.UsuarioNomeObrigatorioException;
 import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.VendaProdutoObrigatorioException;
 
@@ -91,7 +92,12 @@ public class UfapeMarket implements InterfaceFachada {
         return gerenciadorMensagem.enviarMensagem(mensagem);
     }
 
-    public Avaliacao avaliarProduto(Avaliacao avaliacao) {
+    public Avaliacao avaliarProduto(Avaliacao avaliacao)
+            throws UsuarioNaoPodeSeAvaliarException {
+
+        if (avaliacao.getAutor().getId() == avaliacao.getAvaliado().getId()) {
+            throw new UsuarioNaoPodeSeAvaliarException();
+        }
 
         return cadastroAvaliacao.salvarAvaliacao(avaliacao);
     }
