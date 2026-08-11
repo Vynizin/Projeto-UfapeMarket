@@ -34,10 +34,6 @@ public class CadastroAvaliacao implements InterfaceCadastroAvaliacao {
             throw new IllegalArgumentException("O usuário avaliado é obrigatório.");
         }
 
-        if (avaliacao.getAutor().getId() == avaliacao.getAvaliado().getId()) {
-            throw new IllegalArgumentException("O usuário não pode avaliar a si mesmo.");
-        }
-
         return repositorioAvaliacao.save(avaliacao);
     }
 
