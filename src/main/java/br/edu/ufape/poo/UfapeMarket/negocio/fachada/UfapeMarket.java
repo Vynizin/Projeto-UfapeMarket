@@ -23,6 +23,7 @@ import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.CategoriaDuplicadaException
 import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.MensagemVaziaException;
 import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.ProdutoCategoriaObrigatoriaException;
 import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.ProdutoEstoqueInsuficienteException;
+import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.ProdutoIndisponivelException;
 import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.ProdutoQuantidadeInvalidaException;
 import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.UsuarioEmailInvalidoException;
 import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.UsuarioEmailJaCadastradoException;
@@ -48,11 +49,7 @@ public class UfapeMarket implements InterfaceFachada {
     private InterfaceGerenciadorMensagem gerenciadorMensagem;
 
 
-    // =========================
-    // USUARIO
-    // =========================
 
-    @Override
     public Usuario salvarUsuario(Usuario usuario)
             throws UsuarioNomeObrigatorioException,
                    UsuarioEmailInvalidoException,
@@ -61,88 +58,49 @@ public class UfapeMarket implements InterfaceFachada {
         return cadastroUsuario.salvarUsuario(usuario);
     }
 
-    @Override
+
     public List<Usuario> listarUsuarios() {
         return cadastroUsuario.listarUsuarios();
     }
 
-    @Override
     public Usuario localizarUsuarioEmail(String email) {
         return cadastroUsuario.localizarUsuarioEmail(email);
     }
 
-
-    // =========================
-    // CATEGORIA
-    // =========================
-
-    @Override
     public Categoria salvarCategoria(Categoria categoria)
             throws CategoriaDuplicadaException {
 
         return cadastroCategoria.salvarCategoria(categoria);
     }
 
-    @Override
     public List<Categoria> listarCategorias() {
         return cadastroCategoria.listarCategorias();
     }
 
-
-    // =========================
-    // CHAT
-    // =========================
-
-    @Override
     public Chat salvarChat(Chat chat) {
         return cadastroChat.salvarChat(chat);
     }
 
-    @Override
     public List<Chat> listarChats() {
         return cadastroChat.listarChats();
     }
 
-
-    // =========================
-    // MENSAGEM
-    // =========================
-
-    @Override
     public Mensagem enviarMensagem(Mensagem mensagem)
             throws MensagemVaziaException {
 
         return gerenciadorMensagem.enviarMensagem(mensagem);
     }
 
-
-    // =========================
-    // AVALIACAO
-    // =========================
-
-    @Override
     public Avaliacao avaliarProduto(Avaliacao avaliacao) {
 
         return cadastroAvaliacao.salvarAvaliacao(avaliacao);
     }
 
-
-    // =========================
-    // FAVORITO
-    // =========================
-
-    @Override
     public void favoritarProduto(Usuario usuario, Produto produto) {
 
         usuario.favoritarProduto(produto);
     }
 
-
-    // =========================
-    // CATEGORIA DO PRODUTO
-    // =========================
-
-    @Override
     public void escolherCategoria(
             Produto produto,
             Categoria categoria)
@@ -151,16 +109,18 @@ public class UfapeMarket implements InterfaceFachada {
         produto.alterarCategoria(categoria);
     }
 
-
-
-    @Override
     public void fazerVenda(
             Venda venda,
             Produto produto,
             int quantidade)
             throws VendaProdutoObrigatorioException,
                    ProdutoQuantidadeInvalidaException,
-                   ProdutoEstoqueInsuficienteException {
+                   ProdutoEstoqueInsuficienteException,
+                   ProdutoIndisponivelException {
+
+        if (!produto.isDisponivel()) {
+            throw new ProdutoIndisponivelException();
+        }
 
         venda.realizarVenda(produto, quantidade);
     }

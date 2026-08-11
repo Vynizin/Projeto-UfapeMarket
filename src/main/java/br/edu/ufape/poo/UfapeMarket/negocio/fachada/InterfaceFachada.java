@@ -1,5 +1,6 @@
 package br.edu.ufape.poo.UfapeMarket.negocio.fachada;
 
+
 import java.util.List;
 
 import br.edu.ufape.poo.UfapeMarket.negocio.basica.Avaliacao;
@@ -18,6 +19,7 @@ import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.UsuarioEmailInvalidoExcepti
 import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.UsuarioEmailJaCadastradoException;
 import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.UsuarioNomeObrigatorioException;
 import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.VendaProdutoObrigatorioException;
+import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.ProdutoIndisponivelException;
 
 public interface InterfaceFachada {
 
@@ -52,5 +54,5 @@ public interface InterfaceFachada {
     void fazerVenda(Venda venda, Produto produto, int quantidade)
             throws VendaProdutoObrigatorioException,
                    ProdutoQuantidadeInvalidaException,
-                   ProdutoEstoqueInsuficienteException;
-}
+                   ProdutoEstoqueInsuficienteException,
+                   ProdutoIndisponivelException;}
