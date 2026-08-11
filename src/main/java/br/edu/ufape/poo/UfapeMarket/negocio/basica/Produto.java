@@ -2,6 +2,12 @@ package br.edu.ufape.poo.UfapeMarket.negocio.basica;
 
 import java.util.List;
 
+import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.ProdutoPrecoInvalidoException;
+import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.ProdutoQuantidadeInvalidaException;
+import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.ProdutoCategoriaObrigatoriaException;
+import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.ProdutoDescricaoObrigatoriaException;
+import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.ProdutoEstoqueInsuficienteException;
+import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.ProdutoNomeObrigatorioException;
 import jakarta.persistence.*;
 
 @Entity
@@ -30,9 +36,13 @@ public class Produto {
 	@ManyToMany(mappedBy = "produto")
     private List<Venda> vendas;
 
+	public Produto() {
+		
+	}
+	
 	public Produto(long id, String nome, String descricaoProduto, String fotoProduto, double preco, boolean disponivel,
 			int quantidadeDisponivel, String turnoDisponibilidade, String formasPagamento, Categoria categoria,
-			Usuario vendedor, Venda venda) {
+			Usuario vendedor, List<Venda> vendas) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -45,7 +55,85 @@ public class Produto {
 		this.formasPagamento = formasPagamento;
 		this.categoria = categoria;
 		this.vendedor = vendedor;
-		this.vendas = (List<Venda>) venda;
+		this.vendas = vendas;
+		}
+	
+	public void alterarPreco(double novoPreco) throws ProdutoPrecoInvalidoException {
+		if(novoPreco < 0.01) {
+			throw new ProdutoPrecoInvalidoException();
+		}
+		else {
+			this.preco = novoPreco;
+		}
+	}
+	
+	public void baixarEstoque(int quantidade)
+	        throws ProdutoQuantidadeInvalidaException, ProdutoEstoqueInsuficienteException {
+
+	    if (quantidade <= 0) {
+	        throw new ProdutoQuantidadeInvalidaException();
+	    }
+
+	    if (quantidade > this.quantidadeDisponivel) {
+	        throw new ProdutoEstoqueInsuficienteException();
+	    }
+
+	    this.quantidadeDisponivel =
+	            this.quantidadeDisponivel - quantidade;
+
+	    if (this.quantidadeDisponivel == 0) {
+	        this.disponivel = false;
+	    }
+	}
+	
+	public void reporEstoque(int quantidade)
+	        throws ProdutoQuantidadeInvalidaException {
+
+	    if (quantidade <= 0) {
+	        throw new ProdutoQuantidadeInvalidaException();
+	    }
+
+	    this.quantidadeDisponivel =
+	            this.quantidadeDisponivel + quantidade;
+
+	    this.disponivel = true;
+	}
+	
+	public void alterarDisponibilidade(boolean disponivel) {
+		if(this.quantidadeDisponivel == 0) {
+			this.disponivel = false;
+		}
+		else {
+		this.disponivel = disponivel;
+		}
+	}
+	
+	public void alterarDescricao(String descricao)
+	        throws ProdutoDescricaoObrigatoriaException {
+
+	    if (descricao == null || descricao.trim().isEmpty()) {
+	        throw new ProdutoDescricaoObrigatoriaException();
+	    }
+
+	    this.descricaoProduto = descricao;
+	}
+	public void alterarNome(String nome)
+	        throws ProdutoNomeObrigatorioException {
+
+	    if (nome == null || nome.trim().isEmpty()) {
+	        throw new ProdutoNomeObrigatorioException();
+	    }
+
+	    this.nome = nome;
+	}
+	public void alterarCategoria(Categoria categoria)
+	        throws ProdutoCategoriaObrigatoriaException {
+
+	    if (categoria == null) {
+	        throw new ProdutoCategoriaObrigatoriaException();
+	    }
+
+	    this.categoria = categoria;
 	}
 
 	public long getId() {

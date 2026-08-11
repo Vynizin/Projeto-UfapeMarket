@@ -2,7 +2,12 @@ package br.edu.ufape.poo.UfapeMarket.negocio.basica;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.ArrayList;
 
+import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.ProdutoEstoqueInsuficienteException;
+import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.ProdutoQuantidadeInvalidaException;
+import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.VendaDataObrigatoriaException;
+import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.VendaProdutoObrigatorioException;
 import jakarta.persistence.*;
 
 @Entity 
@@ -21,16 +26,63 @@ public class Venda {
         joinColumns = @JoinColumn(name = "venda_id"),
         inverseJoinColumns = @JoinColumn(name = "produto_id")
     )
-    private List<Produto> produto;
-
-	public Venda(long id, LocalDate dataVenda, int quantidadeVendida, Produto produto) {
+	private List<Produto> produto = new ArrayList<>();
+	
+	public Venda() {
+		
+	}
+	public Venda(long id, LocalDate dataVenda, int quantidadeVendida, List<Produto> produtos) {
 		super();
 		this.id = id;
 		this.dataVenda = dataVenda;
 		this.quantidadeVendida = quantidadeVendida;
-		this.produto = (List<Produto>) produto;
+		this.produto =  produtos;
 	}
 
+	public void alterarDataVenda(LocalDate dataVenda)
+	        throws VendaDataObrigatoriaException {
+
+	    if (dataVenda == null) {
+	        throw new VendaDataObrigatoriaException();
+	    }
+
+	    this.dataVenda = dataVenda;
+	}
+	
+	public void alterarQuantidadeVendida(int quantidade)
+	        throws ProdutoQuantidadeInvalidaException {
+
+	    if (quantidade <= 0) {
+	        throw new ProdutoQuantidadeInvalidaException();
+	    }
+
+	    this.quantidadeVendida = quantidade;
+	}
+	
+	public void adicionarProduto(Produto produto)
+	        throws VendaProdutoObrigatorioException {
+
+	    if (produto == null) {
+	        throw new VendaProdutoObrigatorioException();
+	    }
+
+	    this.produto.add(produto);
+	}
+	
+	public void realizarVenda(Produto produto, int quantidade)
+	        throws VendaProdutoObrigatorioException,
+	               ProdutoQuantidadeInvalidaException,
+	               ProdutoEstoqueInsuficienteException {
+
+	    if (produto == null) {
+	        throw new VendaProdutoObrigatorioException();
+	    }
+
+	    produto.baixarEstoque(quantidade);
+
+	    this.quantidadeVendida = quantidade;
+	}
+	
 	public long getId() {
 		return id;
 	}
