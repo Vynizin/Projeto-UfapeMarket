@@ -21,6 +21,8 @@ import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.UsuarioNomeObrigatorioExcep
 import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.VendaProdutoObrigatorioException;
 import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.ProdutoIndisponivelException;
 import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.UsuarioNaoPodeSeAvaliarException;
+import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.UsuarioNaoEncontradoException;
+
 
 public interface InterfaceFachada {
 
@@ -47,6 +49,12 @@ public interface InterfaceFachada {
 
     Avaliacao avaliarProduto(Avaliacao avaliacao)
             throws UsuarioNaoPodeSeAvaliarException;
+    
+    Usuario procurarUsuarioID(Long id)
+            throws UsuarioNaoEncontradoException;
+
+    void deletarUsuarioId(Long id)
+            throws UsuarioNaoEncontradoException;
 
     void favoritarProduto(Usuario usuario, Produto produto);
 
