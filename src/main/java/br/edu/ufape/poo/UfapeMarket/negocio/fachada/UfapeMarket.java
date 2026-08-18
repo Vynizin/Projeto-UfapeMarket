@@ -27,6 +27,7 @@ import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.ProdutoIndisponivelExceptio
 import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.ProdutoQuantidadeInvalidaException;
 import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.UsuarioEmailInvalidoException;
 import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.UsuarioEmailJaCadastradoException;
+import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.UsuarioNaoEncontradoException;
 import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.UsuarioNaoPodeSeAvaliarException;
 import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.UsuarioNomeObrigatorioException;
 import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.VendaProdutoObrigatorioException;
@@ -129,5 +130,19 @@ public class UfapeMarket implements InterfaceFachada {
         }
 
         venda.realizarVenda(produto, quantidade);
+    }
+    
+    @Override
+    public Usuario procurarUsuarioID(Long id)
+            throws UsuarioNaoEncontradoException {
+
+        return cadastroUsuario.procurarUsuarioID(id).get();
+    }
+
+    @Override
+    public void deletarUsuarioId(Long id)
+            throws UsuarioNaoEncontradoException {
+
+        cadastroUsuario.deletarUsuarioId(id);
     }
 }
