@@ -1,6 +1,7 @@
 package br.edu.ufape.poo.UfapeMarket.comunicacao.conversor;
 
 import org.springframework.stereotype.Component;
+
 import br.edu.ufape.poo.UfapeMarket.comunicacao.dto.request.CategoriaDTORequest;
 import br.edu.ufape.poo.UfapeMarket.comunicacao.dto.response.CategoriaDTOResponse;
 import br.edu.ufape.poo.UfapeMarket.negocio.basica.Categoria;
@@ -15,6 +16,9 @@ public class CategoriaConversor {
     }
 
     public CategoriaDTOResponse entityToResponse(Categoria categoria) {
-        return new CategoriaDTOResponse(categoria.getId(), categoria.getNome());
+        return new CategoriaDTOResponse(
+            categoria.getId(),
+            categoria.getNome()
+        );
     }
 }

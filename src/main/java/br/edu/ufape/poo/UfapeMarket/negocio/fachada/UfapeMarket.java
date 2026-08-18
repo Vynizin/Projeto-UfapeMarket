@@ -138,6 +138,16 @@ public class UfapeMarket implements InterfaceFachada {
     }
     
     @Override
+    public void removerMensagemId(Long id) {
+        gerenciadorMensagem.removerMensagemId(id);
+    }
+    
+    @Override
+    public void removerCategoriaId(Long id) {
+        cadastroCategoria.removerCategoriaId(id);
+    }
+    
+    @Override
     public Usuario procurarUsuarioID(Long id)
             throws UsuarioNaoEncontradoException {
 
