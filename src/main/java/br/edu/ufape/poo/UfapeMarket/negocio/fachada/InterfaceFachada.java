@@ -10,6 +10,7 @@ import br.edu.ufape.poo.UfapeMarket.negocio.basica.Mensagem;
 import br.edu.ufape.poo.UfapeMarket.negocio.basica.Produto;
 import br.edu.ufape.poo.UfapeMarket.negocio.basica.Usuario;
 import br.edu.ufape.poo.UfapeMarket.negocio.basica.Venda;
+import br.edu.ufape.poo.UfapeMarket.negocio.basica.Notificacao;
 import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.CategoriaDuplicadaException;
 import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.MensagemVaziaException;
 import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.ProdutoCategoriaObrigatoriaException;
@@ -65,4 +66,16 @@ public interface InterfaceFachada {
             throws VendaProdutoObrigatorioException,
                    ProdutoQuantidadeInvalidaException,
                    ProdutoEstoqueInsuficienteException,
-                   ProdutoIndisponivelException;}
+                   ProdutoIndisponivelException;
+    
+    Notificacao salvarNotificacao(Notificacao notificacao);
+
+    List<Notificacao> listarNotificacoes();
+
+    Notificacao procurarNotificacaoID(Long id);
+
+    void deletarNotificacaoId(Long id);
+
+    void marcarNotificacaoComoLida(Long id);
+}
+

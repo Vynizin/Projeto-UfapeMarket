@@ -12,12 +12,14 @@ import br.edu.ufape.poo.UfapeMarket.negocio.basica.Mensagem;
 import br.edu.ufape.poo.UfapeMarket.negocio.basica.Produto;
 import br.edu.ufape.poo.UfapeMarket.negocio.basica.Usuario;
 import br.edu.ufape.poo.UfapeMarket.negocio.basica.Venda;
+import br.edu.ufape.poo.UfapeMarket.negocio.basica.Notificacao;
 
 import br.edu.ufape.poo.UfapeMarket.negocio.cadastro.InterfaceCadastroAvaliacao;
 import br.edu.ufape.poo.UfapeMarket.negocio.cadastro.InterfaceCadastroCategoria;
 import br.edu.ufape.poo.UfapeMarket.negocio.cadastro.InterfaceCadastroChat;
 import br.edu.ufape.poo.UfapeMarket.negocio.cadastro.InterfaceCadastroUsuario;
 import br.edu.ufape.poo.UfapeMarket.negocio.cadastro.InterfaceGerenciadorMensagem;
+import br.edu.ufape.poo.UfapeMarket.negocio.cadastro.InterfaceCadastroNotificacao;
 
 import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.CategoriaDuplicadaException;
 import br.edu.ufape.poo.UfapeMarket.negocio.excecoes.MensagemVaziaException;
@@ -49,6 +51,9 @@ public class UfapeMarket implements InterfaceFachada {
 
     @Autowired
     private InterfaceGerenciadorMensagem gerenciadorMensagem;
+    
+    @Autowired
+    private InterfaceCadastroNotificacao cadastroNotificacao;
 
 
 
@@ -144,5 +149,32 @@ public class UfapeMarket implements InterfaceFachada {
             throws UsuarioNaoEncontradoException {
 
         cadastroUsuario.deletarUsuarioId(id);
+    }
+    
+    @Override
+    public Notificacao salvarNotificacao(Notificacao notificacao) {
+        return cadastroNotificacao.salvarNotificacao(notificacao);
+    }
+
+    @Override
+    public List<Notificacao> listarNotificacoes() {
+        return cadastroNotificacao.listarNotificacoes();
+    }
+
+    @Override
+    public Notificacao procurarNotificacaoID(Long id) {
+        return cadastroNotificacao.procurarNotificacaoID(id)
+                .orElseThrow(() ->
+                        new IllegalArgumentException("Notificação não encontrada."));
+    }
+
+    @Override
+    public void deletarNotificacaoId(Long id) {
+        cadastroNotificacao.deletarNotificacaoId(id);
+    }
+
+    @Override
+    public void marcarNotificacaoComoLida(Long id) {
+        cadastroNotificacao.marcarComoLida(id);
     }
 }
