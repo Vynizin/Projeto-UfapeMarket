@@ -117,4 +117,10 @@ public interface InterfaceFachada {
     void deletarNotificacaoId(Long id);
 
     void marcarNotificacaoComoLida(Long id);
+    
+    List<Avaliacao> listarAvaliacoes();
+
+    Avaliacao procurarAvaliacaoID(Long id);
+
+    void deletarAvaliacaoId(Long id);
 }

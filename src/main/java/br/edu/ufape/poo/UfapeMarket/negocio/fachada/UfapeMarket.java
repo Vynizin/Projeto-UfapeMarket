@@ -262,4 +262,20 @@ public class UfapeMarket implements InterfaceFachada {
     public void deletarVendaId(Long id) {
         cadastroVenda.deletarVendaId(id);
     }
+    
+    @Override
+    public List<Avaliacao> listarAvaliacoes() {
+        return cadastroAvaliacao.listarAvaliacoes();
+    }
+
+    @Override
+    public Avaliacao procurarAvaliacaoID(Long id) {
+        return cadastroAvaliacao.procurarAvaliacaoID(id)
+                .orElseThrow(() -> new IllegalArgumentException("Avaliação não encontrada."));
+    }
+
+    @Override
+    public void deletarAvaliacaoId(Long id) {
+        cadastroAvaliacao.deletarAvaliacaoId(id);
+    }
 }
